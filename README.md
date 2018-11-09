@@ -1,2 +1,2 @@
-# map-coloring
-Map coloring problem of AI 
+# graph-coloring
+Graph coloring problem of AI (Academia)
