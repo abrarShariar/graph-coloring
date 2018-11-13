@@ -1,4 +1,8 @@
+# choosing first node with degree heruistics
+# applying MRV with backtracking
+
 from enum import Enum
+import pdb
 
 class Color(Enum):
     RED = 1
@@ -21,8 +25,13 @@ class Graph:
 
     def graphColorUtil(self, node, colorLimit):
         if node == '':
+            # check and color any uncolored node
+            for key, value in self.color.iteritems():
+                if value == 0:
+                    self.graphColorUtil(key, colorLimit)
             return True
 
+        # pdb.set_trace()
         for c in range(1, colorLimit+1):
             if(self.isSafe(node, c) == True):
                 self.color[node] = c
@@ -35,8 +44,8 @@ class Graph:
         return False
 
 
-
     def graphColoring(self, colorLimit):
+        # pdb.set_trace()
         startNode = self.pickNode('')
         if(self.graphColorUtil(startNode, colorLimit) == True):
             return True
@@ -64,15 +73,16 @@ class Graph:
                     selectedNode = childNode
 
         return selectedNode
-
+        
+# driver code
 def main():
     adjacencyList = {
         'WA': ['NT', 'SA'],
         'NT': ['WA', 'SA', 'Q'],
         'SA': ['WA', 'NT', 'Q', 'NSW', 'V'],
         'Q': ['NT', 'SA', 'NSW'],
-        'NSW': ['SA', 'Q'],
-        'V': ['SA', 'T'],
+        'NSW': ['SA', 'Q', 'V'],
+        'V': ['SA', 'T', 'NSW'],
         'T': ['V']
     };
 
@@ -86,14 +96,10 @@ def main():
         'T': 0
     };
 
-    # nodeSequence = ['WA', 'NT', 'SA', 'Q', 'NSW', 'V', 'T']
     g = Graph(7, adjacencyList, color)
     colorLimit = 3
     g.graphColoring(colorLimit)
 
-    # for i in range(len(nodeSequence)):
-    #     print(nodeSequence[i], Color(color[nodeSequence[i]]))
-
     for node, color in g.color.iteritems():
-        print(node, (color))
+        print(node, Color(color).name)
 main()

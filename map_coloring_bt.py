@@ -1,4 +1,5 @@
 from enum import Enum
+# import pdb
 
 class Color(Enum):
     RED = 1
@@ -21,6 +22,7 @@ class Graph:
 
 
     def graphColorUtil(self, node, colorLimit):
+        # pdb.set_trace()
         if node == self.totalNodes:
             return True
 
@@ -70,6 +72,7 @@ def main():
     colorLimit = 3
     g.graphColoring(0, colorLimit, nodeSequence)
 
+    # print the node sequence with corresponding color
     for i in range(len(nodeSequence)):
         print(nodeSequence[i], Color(color[nodeSequence[i]]))
 
