@@ -51,7 +51,8 @@ def main():
         'SA': ['WA', 'NT', 'Q', 'NSW', 'V'],
         'Q': ['NT', 'SA', 'NSW'],
         'NSW': ['SA', 'Q'],
-        'V': ['SA']
+        'V': ['SA'],
+        'T': ['V']
     };
 
     color = {
@@ -60,11 +61,12 @@ def main():
         'SA': 0,
         'Q': 0,
         'NSW': 0,
-        'V': 0
+        'V': 0,
+        'T': 0
     };
 
-    nodeSequence = ['WA', 'NT', 'SA', 'Q', 'NSW', 'V']
-    g = Graph(6, adjacencyList, color)
+    nodeSequence = ['WA', 'NT', 'SA', 'Q', 'NSW', 'V', 'T']
+    g = Graph(7, adjacencyList, color)
     colorLimit = 3
     g.graphColoring(0, colorLimit, nodeSequence)
 
